@@ -13,13 +13,17 @@ public class Direction {
                 return new Direction('E');
             case 'S':
                 return new Direction('W');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
+            return getDirection();
         }
+    }
+
+    private com.twu.refactoring.Direction getDirection() {
+        case 'E':
+        return new Direction('N');
+        case 'W':
+        return new Direction('S');
+        default:
+        throw new IllegalArgumentException();
     }
 
     public Direction turnLeft() {
@@ -28,21 +32,16 @@ public class Direction {
                 return new Direction('W');
             case 'S':
                 return new Direction('E');
-            case 'E':
-                return new Direction('N');
-            case 'W':
-                return new Direction('S');
-            default:
-                throw new IllegalArgumentException();
+            return getDirection();
         }
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
 
-        Direction direction1 = (Direction) o;
+        Direction direction1 = (Direction) object;
 
         if (direction != direction1.direction) return false;
 

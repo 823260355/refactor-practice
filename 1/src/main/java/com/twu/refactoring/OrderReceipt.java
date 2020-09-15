@@ -8,39 +8,36 @@ package com.twu.refactoring;
  * 
  */
 public class OrderReceipt {
-    private Order o;
+    private Order order;
 
-    public OrderReceipt(Order o) {
-        this.o = o;
+    public OrderReceipt(Order order) {
+        this.order = order;
 	}
 
 	public String printReceipt() {
 		StringBuilder output = new StringBuilder();
 
 		// print headers
-		output.append("======Printing Orders======\n");
+		final String header="======Printing Orders======\n"
+		output.append(header);
 
 		// print date, bill no, customer name
 //        output.append("Date - " + order.getDate();
-        output.append(o.getCustomerName());
-        output.append(o.getCustomerAddress());
+        output.append(order.getCustomerName());
+        output.append(order.getCustomerAddress());
 //        output.append(order.getCustomerLoyaltyNumber());
 
 		// prints lineItems
 		double totSalesTx = 0d;
 		double tot = 0d;
-		for (LineItem lineItem : o.getLineItems()) {
-			output.append(lineItem.getDescription());
-			output.append('\t');
-			output.append(lineItem.getPrice());
-			output.append('\t');
-			output.append(lineItem.getQuantity());
-			output.append('\t');
-			output.append(lineItem.totalAmount());
-			output.append('\n');
-
+		for (LineItem lineItem : order.getLineItems()) {
+			addAppend(lineItem.getDescription());
+			addAppend(lineItem.getPrice());
+			addAppend(lineItem.getQuantity());
+			addAppend(lineItem.totalAmount());
 			// calculate sales tax @ rate of 10%
-            double salesTax = lineItem.totalAmount() * .10;
+			float tax=.01
+            double salesTax = lineItem.totalAmount() * tax;
             totSalesTx += salesTax;
 
             // calculate total amount of lineItem = price * quantity + 10 % sales tax
@@ -53,5 +50,9 @@ public class OrderReceipt {
         // print total amount
 		output.append("Total Amount").append('\t').append(tot);
 		return output.toString();
+	}
+
+	private void addAppend(StringBuilder output, LineItem lineItem) {
+		output.append('\t');
 	}
 }
